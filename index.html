@@ -13,6 +13,13 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --green-1: #2ecc71; /* bright */
+            --green-2: #21b661; /* slightly darker */
+            --accent-grad: linear-gradient(135deg, var(--green-1), var(--green-2));
+            --muted: #b0b0b0;
+            --card-bg: rgba(255,255,255,0.03);
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -111,7 +118,7 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: #fff;
-            background: linear-gradient(45deg, #4caf50, #45a049);
+            background: var(--accent-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -208,19 +215,21 @@
 
         .cta-button {
             display: inline-block;
-            background: #4caf50;
-            color: #000;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
+            background: var(--accent-grad);
+            color: #042016;
+            padding: 0.75rem 1.6rem;
+            border-radius: 40px;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            transition: all 0.25s ease;
             border: none;
             cursor: pointer;
             margin-right: 1rem;
             animation: slideInLeft 0.8s ease-out 0.3s both;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(33,182,97,0.12);
         }
 
         .cta-button::before {
@@ -253,7 +262,7 @@
         .social-icon {
             width: 45px;
             height: 45px;
-            border: 2px solid #4caf50;
+            border: 2px solid var(--green-2);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -263,7 +272,7 @@
             animation: fadeIn 0.8s ease-out 0.4s both;
             background: transparent;
             text-decoration: none;
-            color: #4caf50;
+            color: var(--green-1);
             font-size: 1.2rem;
         }
 
@@ -289,18 +298,17 @@
             animation: slideInRight 0.8s ease-out;
         }
 
-        .profile-pic {
-            width: 300px;
-            height: 300px;
-            border: 3px solid #4caf50;
+        .profile-pic img{
+            width: 400px;
+            height: 400px;
+            border: 4px solid rgba(33,182,97,0.95);
             border-radius: 50%;
-            background: linear-gradient(135deg, #4caf50, #45a049);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: none;
+            display: block;
+            object-fit: cover;
             font-size: 3rem;
-            box-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
-            animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite;
+            box-shadow: 0 20px 60px rgba(6, 18, 12, 0.45), 0 6px 18px rgba(33,182,97,0.08) inset;
+            animation: float 3s ease-in-out infinite;
         }
 
         /* Services Section */
@@ -381,6 +389,9 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .service-card:hover .service-icon {
@@ -504,8 +515,9 @@
             box-shadow: 0 15px 40px rgba(76, 175, 80, 0.2);
         }
 
-        .project-image {
-            height: 200px;
+        .project-image img{
+            height: 400px;
+            width: 500px;
             background: linear-gradient(135deg, #4caf50, #45a049);
             display: flex;
             align-items: center;
@@ -515,6 +527,8 @@
             transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
+            border-radius: 26px;
+            box-shadow: 0 18px 50px rgba(2,18,10,0.45), 0 6px 18px rgba(33,182,97,0.06) inset;
         }
 
         .project-card:hover .project-image {
@@ -699,12 +713,16 @@
         }
 
         .contact-icon {
-            font-size: 1.8rem;
-            color: #4caf50;
-            min-width: 40px;
+            font-size: 1.1rem;
+            color: #042016;
+            min-width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: var(--green-2);
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(2,18,10,0.28);
         }
 
         .contact-item div {
@@ -727,11 +745,12 @@
         }
 
         .contact-form-wrapper {
-            background: rgba(76, 175, 80, 0.05);
-            border: 1px solid rgba(76, 175, 80, 0.2);
-            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(23,34,45,0.6), rgba(12,18,28,0.6));
+            border: 1px solid rgba(33,182,97,0.12);
+            border-radius: 14px;
             padding: 2rem;
             animation: slideInRight 0.8s ease-out;
+            box-shadow: 0 12px 40px rgba(6,18,12,0.5);
         }
 
         .contact-form-wrapper h3 {
@@ -758,13 +777,13 @@
 
         .form-input,
         .form-textarea {
-            background: rgba(76, 175, 80, 0.08);
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            color: #e0e0e0;
-            padding: 0.85rem;
-            border-radius: 6px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #e8eef0;
+            padding: 0.9rem 0.95rem;
+            border-radius: 10px;
             font-family: inherit;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             position: relative;
         }
 
@@ -776,9 +795,9 @@
         .form-input:focus,
         .form-textarea:focus {
             outline: none;
-            border-color: #4caf50;
-            background: rgba(76, 175, 80, 0.12);
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.25);
+            border-color: var(--green-2);
+            background: rgba(33,182,97,0.03);
+            box-shadow: 0 12px 40px rgba(33,182,97,0.08);
             transform: translateY(-2px);
         }
 
@@ -788,14 +807,14 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #4caf50, #45a049);
-            color: #000;
-            padding: 0.75rem 1.5rem;
+            background: var(--accent-grad);
+            color: #042016;
+            padding: 0.8rem 1.6rem;
             border: none;
-            border-radius: 50px;
-            font-weight: 600;
+            border-radius: 40px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             align-self: flex-start;
             position: relative;
             overflow: hidden;
@@ -818,9 +837,8 @@
         }
 
         .submit-btn:hover {
-            background: linear-gradient(135deg, #45a049, #4caf50);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 18px 50px rgba(33,182,97,0.12);
         }
 
         /* Footer */
@@ -1152,9 +1170,9 @@
                 font-size: 2.8rem;
             }
 
-            .profile-pic {
-                width: 250px;
-                height: 250px;
+            .profile-pic img {
+                width: 150px;
+                height: 150px;
             }
 
             section {
@@ -1177,6 +1195,11 @@
             .skills-cards-grid {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
                 gap: 1rem;
+            }
+
+            .project-image img {
+                height: 250px;
+                width: 250px;
             }
         }
 
@@ -1216,10 +1239,9 @@
                 font-size: 0.95rem;
             }
 
-            .profile-pic {
-                width: 200px;
-                height: 200px;
-                font-size: 2rem;
+            .profile-pic img {
+                width: 120px;
+                height: 120px;
             }
 
             .cta-button {
@@ -1356,6 +1378,11 @@
             .skill-card h4 {
                 font-size: 0.85rem;
             }
+
+            .project-image img {
+                height: 200px;
+                width: 200px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1387,10 +1414,9 @@
                 margin-bottom: 1.5rem;
             }
 
-            .profile-pic {
-                width: 150px;
-                height: 150px;
-                font-size: 1.5rem;
+            .profile-pic img {
+                width: 80px;
+                height: 80px;
             }
 
             .cta-button {
@@ -1456,6 +1482,11 @@
 
             .project-image {
                 height: 150px;
+            }
+
+            .project-image img {
+                height: 150px;
+                width: 150px;
             }
 
             .contact-info h2 {
@@ -1578,7 +1609,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <div class="profile-pic">👨‍💻</div>
+                <div class="profile-pic"><img src="/Images/profile.png" alt="PP"></div>
             </div>
         </div>
     </section>
@@ -1843,15 +1874,15 @@
                         <div class="slide-left">
                             <div class="slide-number">01</div>
                             <h3 class="slide-title">Frontend Project</h3>
-                            <p class="slide-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat tempora velit maiores vitae atque accusantium iste voluptate.</p>
-                            <div class="project-tech">HTML5, CSS3, JavaScript</div>
+                            <p class="slide-desc">Resilient Notepad including robust  a offline-first architecture, local data persistence using IndexedDB (Dexie), and the sequential synchronization logic for text and image actions.</p>
+                            <div class="project-tech">NEXT.JS, CSS3, TypeScript</div>
                             <div class="project-links">
-                                <a href="#" class="icon-btn" title="Live"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="icon-btn" title="Source"><i class="fab fa-github"></i></a>
+                                <a href="https://synscribe.netlify.app/" class="icon-btn" title="Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/Cicadalp/Synscribe" class="icon-btn" title="Source"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                         <div class="slide-right">
-                            <div class="project-image">🎯</div>
+                            <div class="project-image"><img src="Images/imgfolio2.png" alt=""></div>
                         </div>
                     </div>
 
@@ -1859,15 +1890,15 @@
                         <div class="slide-left">
                             <div class="slide-number">02</div>
                             <h3 class="slide-title">Full Stack Project</h3>
-                            <p class="slide-desc">A full stack application built with modern tools and deployed to production with CI/CD pipelines.</p>
-                            <div class="project-tech">MongoDB, Express.js, React.js, Node.js</div>
+                            <p class="slide-desc">A full stack application survey(Questionnaire) for an Afro-Australian Cosmetic brand collect customers insights.</p>
+                            <div class="project-tech">MongoDB, (Node.js)Express.js, HTML, CSS,JavaScript</div>
                             <div class="project-links">
-                                <a href="#" class="icon-btn" title="Live"><i class="fas fa-external-link-alt"></i></a>
-                                <a href="#" class="icon-btn" title="Source"><i class="fab fa-github"></i></a>
+                                <a href="https://cosmeticsurvey.netlify.app/" class="icon-btn" title="Live"><i class="fas fa-external-link-alt"></i></a>
+                                <a href="https://github.com/Cicadalp/Cosmetic-" class="icon-btn" title="Source"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
                         <div class="slide-right">
-                            <div class="project-image">🚀</div>
+                            <div class="project-image"><img src="Images/imgfolio.png" alt=""></div>
                         </div>
                     </div>
                 </div>
@@ -1915,17 +1946,19 @@
 
                 <div class="contact-form-wrapper">
                     <h3>Contact <span class="highlight">Me!</span></h3>
-                    <form class="contact-form">
+                    <form id="contact-form" class="contact-form">
+                        <!-- Required by EmailJS template; keep these name attributes -->
+                        <input type="hidden" name="to_email" value="alexlptsague@gmail.com">
                         <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Your Name" required>
-                            <input type="email" class="form-input" placeholder="Email Address" required>
+                            <input type="text" name="user_name" class="form-input" placeholder="Your Name" required>
+                            <input type="email" name="user_email" class="form-input" placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Phone Number">
-                            <input type="text" class="form-input" placeholder="Subject">
+                            <input type="text" name="user_phone" class="form-input" placeholder="Phone Number">
+                            <input type="text" name="subject" class="form-input" placeholder="Subject">
                         </div>
                         <div class="form-group full">
-                            <textarea class="form-textarea" placeholder="Your Message" required></textarea>
+                            <textarea name="message" class="form-textarea" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="submit-btn">Send Message</button>
                     </form>
@@ -1970,12 +2003,61 @@
             });
         });
 
-        // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            document.querySelector('.contact-form').reset();
-        });
+        // Form submission via EmailJS
+        // NOTE: To make this work you must sign up at https://www.emailjs.com,
+        // create a service and email template, then replace the placeholders
+        // below with your EmailJS `userID`, `serviceID` and `templateID`.
+        // The template should map to the fields: user_name, user_email, user_phone, subject, message, to_email
+        (function() {
+            // load EmailJS (the SDK script is added at the end of body)
+            const contactForm = document.getElementById('contact-form');
+            if (!contactForm) return;
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // replace these with your real EmailJS IDs
+                const EMAILJS_USER_ID = 'YOUR_EMAILJS_USER_ID';
+                const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+                const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+                if (EMAILJS_USER_ID === 'YOUR_EMAILJS_USER_ID') {
+                    // Developer note: send a helpful fallback if EmailJS isn't configured
+                    alert('Email sending is not configured. Please add your EmailJS user ID in the script.');
+                    return;
+                }
+
+                // initialize emailjs if not already
+                if (window.emailjs && !emailjs._initialized) {
+                    emailjs.init(EMAILJS_USER_ID);
+                    emailjs._initialized = true;
+                }
+
+                // show sending state
+                const submitBtn = contactForm.querySelector('.submit-btn');
+                const originalBtnText = submitBtn ? submitBtn.textContent : '';
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending...';
+                }
+
+                // send form using EmailJS
+                emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, contactForm)
+                    .then(function() {
+                        alert('Thank you — your message was sent. I will get back to you soon.');
+                        contactForm.reset();
+                    }, function(error) {
+                        console.error('EmailJS error:', error);
+                        alert('Sorry, something went wrong while sending your message. Please try again later.');
+                    })
+                    .finally(function() {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = originalBtnText;
+                        }
+                    });
+            });
+        })();
 
         // Resume Tab Switching
         document.querySelectorAll('.tab-button').forEach(button => {
@@ -2042,5 +2124,7 @@
             update();
         })();
     </script>
+        <!-- EmailJS SDK (used for sending contact form emails from the client) -->
+        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </body>
 </html>
