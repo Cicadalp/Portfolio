@@ -80,6 +80,56 @@
             }
         }
 
+        /* Scroll animations */
+        @keyframes scrollFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollSlideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scrollSlideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .scroll-animate {
+            opacity: 0;
+        }
+
+        .scroll-animate.fade-in {
+            animation: scrollFadeIn 0.7s ease-in-out forwards;
+        }
+
+        .scroll-animate.slide-in-left {
+            animation: scrollSlideInLeft 0.7s ease-in-out forwards;
+        }
+
+        .scroll-animate.slide-in-right {
+            animation: scrollSlideInRight 0.7s ease-in-out forwards;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a1f35 0%, #16213e 100%);
@@ -298,9 +348,16 @@
             animation: slideInRight 0.8s ease-out;
         }
 
+        .profile-pic {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .profile-pic img{
-            width: 400px;
-            height: 400px;
+            width: clamp(160px, 30vw, 420px);
+            aspect-ratio: 1 / 1;
+            height: auto;
             border: 4px solid rgba(33,182,97,0.95);
             border-radius: 50%;
             background: none;
@@ -309,6 +366,7 @@
             font-size: 3rem;
             box-shadow: 0 20px 60px rgba(6, 18, 12, 0.45), 0 6px 18px rgba(33,182,97,0.08) inset;
             animation: float 3s ease-in-out infinite;
+            max-width: 100%;
         }
 
         /* Services Section */
@@ -1169,11 +1227,12 @@
             .hero-text h1 {
                 font-size: 2.8rem;
             }
-
-            .profile-pic img {
-                width: 150px;
-                height: 150px;
+            .profile-pic img{
+                width: 20rem;
+                height: 20rem;
             }
+
+            /* profile-pic sizing now uses clamp() in the base rule for fluid scaling */
 
             section {
                 padding: 4rem 3%;
@@ -1238,11 +1297,12 @@
             .hero-text p {
                 font-size: 0.95rem;
             }
-
-            .profile-pic img {
-                width: 120px;
-                height: 120px;
+            .profile-pic img{
+                width: 20rem;
+                height: 20rem;
             }
+
+            /* profile-pic sizing now uses clamp() in the base rule for fluid scaling */
 
             .cta-button {
                 padding: 0.6rem 1.2rem;
@@ -1414,10 +1474,7 @@
                 margin-bottom: 1.5rem;
             }
 
-            .profile-pic img {
-                width: 80px;
-                height: 80px;
-            }
+            /* profile-pic sizing now uses clamp() in the base rule for fluid scaling */
 
             .cta-button {
                 padding: 0.5rem 1rem;
@@ -1566,6 +1623,10 @@
 
             .about-section p {
                 font-size: 0.85rem;
+            }
+            .profile-pic img{
+                width: 20rem;
+                height: 20rem;
             }
         }
     </style>
@@ -1917,7 +1978,7 @@
             <div class="contact-wrapper">
                 <div class="contact-info">
                     <h2>Let's Work <span class="highlight">Together</span></h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur neque voluteo biotiose plentatode lite laboriousness nihil verticalis ediptad explicabo.</p>
+                    <p>For any service contact me we will do great things.</p>
                     
                     <div class="contact-item">
                         <div class="contact-icon">📞</div>
@@ -2002,6 +2063,70 @@
                 }
             });
         });
+
+        // Scroll animations using Intersection Observer
+        (function() {
+            // Containers/element selectors to animate
+            const selectors = [
+                '.service-card',
+                '.skill-item',
+                '.skill-card',
+                '.project-card',
+                '.resume-item',
+                '.about-info-item',
+                '.section-title',
+                '.about-intro',
+            ];
+
+            // Apply initial hidden state
+            selectors.forEach(sel => {
+                document.querySelectorAll(sel).forEach(el => {
+                    el.classList.add('scroll-animate');
+                });
+            });
+
+            // Stagger children in grids for nicer appearance
+            const staggerGroups = [
+                '.services-grid .service-card',
+                '.skills-cards-grid .skill-card',
+                '.projects-grid .project-card',
+            ];
+
+            staggerGroups.forEach(groupSel => {
+                document.querySelectorAll(groupSel).forEach((el, i) => {
+                    el.dataset.scrollDelay = i * 120; // ms
+                });
+            });
+
+            // Sections should animate as blocks (except hero which already animates)
+            document.querySelectorAll('section').forEach(sec => {
+                if (sec.id !== 'hero') sec.classList.add('scroll-animate');
+            });
+
+            const observerOptions = {
+                threshold: 0.12,
+                rootMargin: '0px 0px -80px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+
+                    // When element enters view, add the animation class
+                    const target = entry.target;
+                    const delay = target.dataset.scrollDelay ? `${target.dataset.scrollDelay}ms` : '0ms';
+                    // Choose fade-in by default; keep flexibility for other types
+                    target.style.animationDelay = delay;
+                    target.classList.add('fade-in');
+
+                    // stop observing to avoid retrigger
+                    obs.unobserve(target);
+                });
+            }, observerOptions);
+
+            // Observe everything marked hidden
+            document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+        })();
 
         // Form submission via EmailJS
         // NOTE: To make this work you must sign up at https://www.emailjs.com,
